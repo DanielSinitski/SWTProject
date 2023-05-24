@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_r_5SkN1HEe2Nc6V0xYGGFg" name="Test_papyrus" visibility="protected">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_sCFq8N1HEe2Nc6V0xYGGFg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_229DgPoWEe2wR63GxoI2Gg" name="Kunde" visibility="private">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_SFtMcPoaEe2wR63GxoI2Gg" name="birthdate">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-f81MPoWEe2wR63GxoI2Gg" name="Tier" visibility="public" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_RrdgcPoaEe2wR63GxoI2Gg" name="name" visibility="private" isStatic="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_SV5kkPoaEe2wR63GxoI2Gg" name="farbe" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_nlFfIPoaEe2wR63GxoI2Gg" name="age" visibility="public" isStatic="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_7KdjQPoaEe2wR63GxoI2Gg" name="gib_laut" visibility="protected" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Y6nZUPobEe2wR63GxoI2Gg" name="geräusch">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_1eHPAPobEe2wR63GxoI2Gg" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_9kjSAPoYEe2wR63GxoI2Gg" name="Hund">
+    <generalization xmi:type="uml:Generalization" xmi:id="_0zvm4PocEe2wR63GxoI2Gg" general="_-f81MPoWEe2wR63GxoI2Gg"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_kPf40PoZEe2wR63GxoI2Gg" name="name" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_FvRT4fodEe2wR63GxoI2Gg" name="kunde" type="_229DgPoWEe2wR63GxoI2Gg" aggregation="composite" association="_FvQFwPodEe2wR63GxoI2Gg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FvRT4vodEe2wR63GxoI2Gg" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FvR68PodEe2wR63GxoI2Gg" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_TmvW0PoZEe2wR63GxoI2Gg" name="Bellen" visibility="public"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Adw60PoZEe2wR63GxoI2Gg" name="Katze" visibility="protected">
+    <generalization xmi:type="uml:Generalization" xmi:id="_2Uu4gPocEe2wR63GxoI2Gg" general="_-f81MPoWEe2wR63GxoI2Gg"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_SoizwPoaEe2wR63GxoI2Gg" name="going out" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_EPrJYfodEe2wR63GxoI2Gg" name="kunde" type="_229DgPoWEe2wR63GxoI2Gg" aggregation="shared" association="_EPpUMPodEe2wR63GxoI2Gg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EPrwcPodEe2wR63GxoI2Gg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EPrwcfodEe2wR63GxoI2Gg" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_3YreQPobEe2wR63GxoI2Gg" name="bite" visibility="private" isStatic="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_9YnncPobEe2wR63GxoI2Gg" name="who">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_AJcwUPocEe2wR63GxoI2Gg" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_EPpUMPodEe2wR63GxoI2Gg" visibility="public" memberEnd="_EPrJYfodEe2wR63GxoI2Gg _EPrwcvodEe2wR63GxoI2Gg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_EPqiUPodEe2wR63GxoI2Gg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_EPrJYPodEe2wR63GxoI2Gg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_EPrwcvodEe2wR63GxoI2Gg" name="katze" type="_Adw60PoZEe2wR63GxoI2Gg" association="_EPpUMPodEe2wR63GxoI2Gg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_FvQFwPodEe2wR63GxoI2Gg" visibility="public" memberEnd="_FvRT4fodEe2wR63GxoI2Gg _FvR68fodEe2wR63GxoI2Gg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FvQs0PodEe2wR63GxoI2Gg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_FvRT4PodEe2wR63GxoI2Gg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_FvR68fodEe2wR63GxoI2Gg" name="hund" type="_9kjSAPoYEe2wR63GxoI2Gg" association="_FvQFwPodEe2wR63GxoI2Gg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_OYqLkPodEe2wR63GxoI2Gg" name="Schnecke">
+    <generalization xmi:type="uml:Generalization" xmi:id="_RPzX0PodEe2wR63GxoI2Gg" general="_-f81MPoWEe2wR63GxoI2Gg"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_SLI-sPodEe2wR63GxoI2Gg" name="kunde" type="_229DgPoWEe2wR63GxoI2Gg" association="_SLHwkPodEe2wR63GxoI2Gg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xgq3IPodEe2wR63GxoI2Gg" value="1"/>
+      <upperValue xmi:type="uml:LiteralString" xmi:id="_memQ0PodEe2wR63GxoI2Gg" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_SLHwkPodEe2wR63GxoI2Gg" memberEnd="_SLI-sPodEe2wR63GxoI2Gg _SLI-s_odEe2wR63GxoI2Gg" navigableOwnedEnd="_SLI-s_odEe2wR63GxoI2Gg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_SLIXoPodEe2wR63GxoI2Gg" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_SLIXofodEe2wR63GxoI2Gg" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_SLI-s_odEe2wR63GxoI2Gg" name="schnecke" type="_OYqLkPodEe2wR63GxoI2Gg" association="_SLHwkPodEe2wR63GxoI2Gg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zJvGsPodEe2wR63GxoI2Gg"/>
+      <upperValue xmi:type="uml:LiteralString" xmi:id="_kJA5gPodEe2wR63GxoI2Gg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_JHuoAPoeEe2wR63GxoI2Gg" name="howToBeDog"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_RwGzEPoeEe2wR63GxoI2Gg" client="_JHuoAPoeEe2wR63GxoI2Gg" supplier="_9kjSAPoYEe2wR63GxoI2Gg"/>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_VHIZQPoeEe2wR63GxoI2Gg" name="Arten">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_X-MtAPoeEe2wR63GxoI2Gg" name="Bitch" visibility="protected"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_ZRZaQPoeEe2wR63GxoI2Gg" name="Primat"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_bzEFwPoeEe2wR63GxoI2Gg" name="Homosapien" visibility="private"/>
+  </packagedElement>
+</uml:Model>

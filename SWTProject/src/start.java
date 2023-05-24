@@ -26,7 +26,8 @@ public class start {
 	 	resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
 
 	 	//URI uri = URI.createURI("file:/D:\\...\\Workspace_Papyrus\\Block4\\Block4.uml");
-	 	URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\Block4\\model\\Block3.uml");
+	 	URI uri = URI.createURI("file:/C:\\Users\\d_sin\\git\\SWTProject\\SWTProject\\model\\Test_papyrus.uml");
+	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\Test_papyrus\\Test_papyrus.uml");
 	 	
 	 	Resource resource = resourceSet.getResource(uri, true);
    	    EcoreUtil.resolveAll(resourceSet);
@@ -78,17 +79,21 @@ public class start {
 		
 		ret = ret + "\nclass " + clazz.getName() + " {\n";
 		
+		ret = ret + clazz.getVisibility();
+		
 		for (Property property : clazz.getAllAttributes()) {
 			
 			if (property.getAssociation() != null) {
 				ret = ret + "\n" + clazz.getName() + " -- " + ((Property) property.getAssociation().getMembers().get(1)).getType().getName() + "\n";
 			} 
-			
 			if (property.getAssociation() == null) {
 				VisibilityKind vk = property.getVisibility();
 			
 				if (vk.equals(VisibilityKind.PUBLIC)) {
 					ret = ret + "+ ";
+				}
+				if (vk.equals(VisibilityKind.PRIVATE)) {
+					ret = ret + "- ";
 				}
 			
 				ret = ret + property.getName() + ":";
