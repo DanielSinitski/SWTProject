@@ -12,6 +12,7 @@ import org.eclipse.uml2.uml.VisibilityKind;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.resource.UMLResource;
+import org.eclipse.uml2.uml.*;
 
 @SuppressWarnings("restriction")
 public class start {
@@ -25,9 +26,9 @@ public class start {
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
 	 	resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
 
-	 	//URI uri = URI.createURI("file:/D:\\...\\Workspace_Papyrus\\Block4\\Block4.uml");
+	 	//URI uri = URI.createURI("file:/C:\\Users\\\\d_sin\\eclipse-workspace\\Block4a\\\\model\\Block4.uml");
 	 	URI uri = URI.createURI("file:/C:\\Users\\d_sin\\git\\SWTProject\\SWTProject\\model\\Test_papyrus.uml");
-	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\Test_papyrus\\Test_papyrus.uml");
+	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\test2\\test2.uml");
 	 	
 	 	Resource resource = resourceSet.getResource(uri, true);
    	    EcoreUtil.resolveAll(resourceSet);
@@ -65,6 +66,7 @@ public class start {
 			if (packageableElement instanceof org.eclipse.uml2.uml.Class) {
 				org.eclipse.uml2.uml.Class clazz =  (org.eclipse.uml2.uml.Class) packageableElement;
 				System.out.println(uml_class_to_puml_class(clazz));
+				System.out.println(Association.uml_association_to_puml_association(clazz));
 			}
 				
 		}
@@ -79,13 +81,8 @@ public class start {
 		
 		ret = ret + "\nclass " + clazz.getName() + " {\n";
 		
-		ret = ret + clazz.getVisibility();
-		
 		for (Property property : clazz.getAllAttributes()) {
 			
-			if (property.getAssociation() != null) {
-				ret = ret + "\n" + clazz.getName() + " -- " + ((Property) property.getAssociation().getMembers().get(1)).getType().getName() + "\n";
-			} 
 			if (property.getAssociation() == null) {
 				VisibilityKind vk = property.getVisibility();
 			
@@ -107,6 +104,7 @@ public class start {
 		return ret;
 	}
 	
+
 	
 	private static void puml_to_uml(String puml, Resource resource) {
 		
