@@ -33,138 +33,272 @@ public class start {
 	 	Resource resource = resourceSet.getResource(uri, true);
    	    EcoreUtil.resolveAll(resourceSet);
    	 
-   	    Model uml_model = (Model) resource.getContents().get(0);
-   	 	   
-		for (Element element : uml_model.getOwnedElements()) {
-   	 		System.out.println(element);
-   	 	}
-		
-		uml_to_puml(uml_model);
-   	 	
-   	 	puml_to_uml("@startuml\r\n"
-   	 			+ "enum Sterne {\r\n"
-   	 			+ "1\r\n"
-   	 			+ "2\r\n"
-   	 			+ "3\r\n"
-   	 			+ "4\r\n"
-   	 			+ "5\r\n"
-   	 			+ "}\r\n"
-   	 			+ " ... ", resource);
-   	 	
-	}
+   	 Model umlModel = (Model) resource.getContents().get(0);
 
-	private static void uml_to_puml(org.eclipse.uml2.uml.Model model) {
-		
-		System.out.println("\nAnalyze Model:");
-		System.out.println(model.getName());
-		
-		System.out.println("\n@startuml");
-		
-		
-		for (PackageableElement packageableElement : model.getPackagedElements()) {
+     for (Element element : umlModel.getOwnedElements()) {
+         System.out.println(element);
+     }
 
-			if (packageableElement instanceof org.eclipse.uml2.uml.Class) {
-				org.eclipse.uml2.uml.Class clazz =  (org.eclipse.uml2.uml.Class) packageableElement;
-				System.out.println(uml_class_to_puml_class(clazz));
-				System.out.println(Association.uml_association_to_puml_association(clazz));
-			}
-				
-		}
-		
-		System.out.println("\n@enduml");
-		
-	}
-	
-	private static String uml_class_to_puml_class(org.eclipse.uml2.uml.Class clazz) {
-		
+     umlToPuml(umlModel);
+
+     String puml = "@startuml\r\n" + "enum Sterne {\r\n" + "1\r\n" + "2\r\n" + "3\r\n" + "4\r\n" + "5\r\n" + "}\r\n"
+             + "...";
+
+     pumlToUml(puml, resource);
+ }
+
+ private static void umlToPuml(org.eclipse.uml2.uml.Model model) {
+     System.out.println("\nAnalyze Model:");
+     System.out.println(model.getName());
+
+     System.out.println("\n@startuml");
+
+     for (PackageableElement packageableElement : model.getPackagedElements()) {
+         if (packageableElement instanceof org.eclipse.uml2.uml.Class ) {
+             org.eclipse.uml2.uml.Class clazz = (org.eclipse.uml2.uml.Class) packageableElement;
+             System.out.println(Association.uml_association_to_puml_association(clazz));
+             boolean hasAssociations = false;
+            
+             for (Element element : clazz.getOwnedElements()) {
+                 if (element instanceof org.eclipse.uml2.uml.Property) {
+                     org.eclipse.uml2.uml.Property property = (org.eclipse.uml2.uml.Property) element;
+                     if (property.getAssociation() != null) {
+                         hasAssociations = true;
+                         break;
+                     }
+                 }
+             }
+
+             if (hasAssociations) {
+                 System.out.println(umlClassToPumlClass(clazz));
+
+                 // Add class notes if present
+                 for (org.eclipse.uml2.uml.Comment comment : clazz.getOwnedComments()) {
+                     System.out.println("note \"" + comment.getBody() + "\" as " + clazz.getName());
+                 }
+             }
+         }   else if(packageableElement instanceof org.eclipse.uml2.uml.Interface) {
+             org.eclipse.uml2.uml.Interface inter = (org.eclipse.uml2.uml.Interface) packageableElement;
+           System.out.print(uml_interface_to_puml_interface(inter));
+           boolean hasAssociations = false;
+           
+           for (Element element : inter.getOwnedElements()) {
+               if (element instanceof org.eclipse.uml2.uml.Property) {
+                   org.eclipse.uml2.uml.Property property = (org.eclipse.uml2.uml.Property) element;
+                   if (property.getAssociation() != null) {
+                       hasAssociations = true;
+                       break;
+                   }
+               }
+           }
+
+           if (hasAssociations) {
+               System.out.println(uml_interface_to_puml_interface(inter));
+
+               // Add class notes if present
+               for (org.eclipse.uml2.uml.Comment comment : inter.getOwnedComments()) {
+                   System.out.println("note \"" + comment.getBody() + "\" as " + inter.getName());
+               }
+           }
+         }     else if(packageableElement instanceof org.eclipse.uml2.uml.Enumeration) {
+             org.eclipse.uml2.uml.Enumeration enum1 = (org.eclipse.uml2.uml.Enumeration) packageableElement;
+          
+             System.out.print(uml_enum_to_puml_enum(enum1));
+         	
+         }
+     }
+
+     System.out.println("@enduml");
+ }
+
+ private static String umlClassToPumlClass(org.eclipse.uml2.uml.Class clazz) {
+     StringBuilder ret = new StringBuilder();
+
+     // Add class stereotype if present
+     Stereotype stereotype = clazz.getAppliedStereotype("<<stereotypeName>>");
+     if (stereotype != null) {
+         ret.append("  ").append("<<" + stereotype.getName() + ">>").append("\n");
+     }
+
+     // Add visibility symbol based on class visibility
+     VisibilityKind visibility = clazz.getVisibility();
+     String visibilitySymbol = "";
+
+     if (visibility.toString().equals("public")) {
+         visibilitySymbol = "+";
+     } else if (visibility.toString().equals("private")) {
+         visibilitySymbol = "-";
+     } else if (visibility.toString().equals("protected")) {
+         visibilitySymbol = "#";
+     }
+
+     // Check if class is abstract and add notation
+     if (clazz.isAbstract()) {
+         visibilitySymbol += "{abstract} ";
+     }
+
+   
+     ret.append(visibilitySymbol).append("class ").append(clazz.getName()).append(" {\n");
+
+     for (Property property : clazz.getAllAttributes()) {
+         visibility = property.getVisibility();
+         visibilitySymbol = getVisibilitySymbol(visibility);
+
+         if (property.isStatic()) {
+             ret.append("{static} ");
+         }
+
+         
+
+         ret.append("  ").append(visibilitySymbol).append(property.getName()).append(":")
+                 .append(property.getType().getName()).append("\n");
+     }
+
+     for (Element element : clazz.getOwnedElements()) {
+         if (element instanceof org.eclipse.uml2.uml.Operation) {
+             org.eclipse.uml2.uml.Operation operation = (org.eclipse.uml2.uml.Operation) element;
+             ret.append("  ").append(umlMethodeToPumlMethode(operation)).append("\n");
+         }
+     }
+
+     ret.append("}\n");
+     
+     return ret.toString();
+ }
+private static String uml_interface_to_puml_interface(org.eclipse.uml2.uml.Interface inter) {
+	  StringBuilder ret = new StringBuilder();
+
+   // Add class stereotype if present
+   Stereotype stereotype = inter.getAppliedStereotype("<<stereotypeName>>");
+   if (stereotype != null) {
+       ret.append("  ").append("<<" + stereotype.getName() + ">>").append("\n");
+   }
+
+   // Add visibility symbol based on class visibility
+   VisibilityKind visibility = inter.getVisibility();
+   String visibilitySymbol = "";
+
+   if (visibility.toString().equals("public")) {
+       visibilitySymbol = "+";
+   } else if (visibility.toString().equals("private")) {
+       visibilitySymbol = "-";
+   } else if (visibility.toString().equals("protected")) {
+       visibilitySymbol = "#";
+   }
+
+   // Check if class is abstract and add notation
+   if (inter.isAbstract()) {
+       visibilitySymbol += "{abstract} ";
+   }
+
+ 
+   ret.append(visibilitySymbol).append("Interface ").append(inter.getName()).append(" {\n");
+
+   for (Property property : inter.getAllAttributes()) {
+       visibility = property.getVisibility();
+       visibilitySymbol = getVisibilitySymbol(visibility);
+
+       if (property.isStatic()) {
+           ret.append("{static} ");
+       }
+
+       
+
+       ret.append("  ").append(visibilitySymbol).append(property.getName()).append(":")
+               .append(property.getType().getName()).append("\n");
+   }
+
+   for (Element element : inter.getOwnedElements()) {
+       if (element instanceof org.eclipse.uml2.uml.Operation) {
+           org.eclipse.uml2.uml.Operation operation = (org.eclipse.uml2.uml.Operation) element;
+           ret.append("  ").append(umlMethodeToPumlMethode(operation)).append("\n");
+       }
+   }
+
+   ret.append("}\n");
+
+   return ret.toString();
+}
+private static String uml_enum_to_puml_enum(org.eclipse.uml2.uml.Enumeration penum) {
 		String ret = "";
 		
-		ret = ret + "\nclass " + clazz.getName() + " {\n";
+		ret += "\nenum " + penum.getName() + "{\n";
 		
-		for (Property property : clazz.getAllAttributes()) {
-			
-			if (property.getAssociation() == null) {
-				VisibilityKind vk = property.getVisibility();
-			
-				if (vk.equals(VisibilityKind.PUBLIC)) {
-					ret = ret + "+ ";
-				}
-				if (vk.equals(VisibilityKind.PRIVATE)) {
-					ret = ret + "- ";
-				}
-			
-				ret = ret + property.getName() + ":";
-			
-				ret = ret + property.getType().getName() + "\n";
-			}
+		for (EnumerationLiteral lit : penum.getOwnedLiterals()) {
+			ret += lit.getName() + "\n";
 		}
 		
-		ret = ret + "}";
-				
+		ret += "}\n";
 		return ret;
 	}
-	
 
-	
-	private static void puml_to_uml(String puml, Resource resource) {
-		
-		/*
-		UMLPackage.eINSTANCE.eClass();
-		UMLFactory factory = UMLFactory.eINSTANCE;
-		
-		StateMachine statemachine = factory.createStateMachine();
-		statemachine.setName("MyGeneratedStateMachine");
-		
-		Region region = factory.createRegion();
-		region.setName("MyRegion");
-		
-		statemachine.getRegions().add(region);
-		
-		Pseudostate ps =  factory.createPseudostate();
-		ps.setName("Initial1");
-		
-		region.getSubvertices().add(ps);
-		
-		State state = factory.createState();
-		state.setName("On");
-		
-		region.getSubvertices().add(state);
-		
-		Transition transition = factory.createTransition();
-		transition.setSource(ps);
-		transition.setTarget(state);
-		
-		region.getTransitions().add(transition);
-		
-		NamedElement namedElement = uml_model.getOwnedMember("CoffeeMachineController");
-		Operation operation_trigger = ((org.eclipse.uml2.uml.internal.impl.ClassImpl) namedElement).getOperation("switch_on_off", null, null);
-				
-		Operation operation_effect = ((org.eclipse.uml2.uml.internal.impl.ClassImpl) namedElement).getOperation("set_on", null, null);
-		
-		CallEvent call_event = factory.createCallEvent();
-		call_event.setOperation(operation_trigger);
-		
-		Trigger trigger = factory.createTrigger();
-		trigger.setEvent(call_event);
-		
-		Behavior behavior = factory.createOpaqueBehavior();
-		behavior.setSpecification(operation_effect);
-		
-		
-		transition.getTriggers().add(trigger);
-		transition.setEffect(behavior);
-		
-		uml_model.getPackagedElements().add(call_event);
-		
-		uml_model.getPackagedElements().add(statemachine);
-				
-	    try {
-	           resource.save(Collections.EMPTY_MAP);
-	    } catch (IOException e) {
-	           // TODO Auto-generated catch block
-	           e.printStackTrace();
-	    }
-		*/
-	}
+ private static String umlMethodeToPumlMethode(org.eclipse.uml2.uml.Operation operation) {
+     StringBuilder ret = new StringBuilder();
 
+     if (operation.isStatic()) {
+         ret.append("{static} ");
+     }
+
+     ret.append(getAbstractSymbol(operation)).append(getVisibilitySymbol(operation.getVisibility()))
+             .append(operation.getName()).append(getParametersString(operation));
+     ret.append(": ").append(getReturnType(operation)).append(" {");
+
+     ret.append("}");
+
+     return ret.toString();
+ }
+
+ private static String getAbstractSymbol(org.eclipse.uml2.uml.Operation operation) {
+     if (operation.isAbstract()) {
+         return "{abstract} ";
+     } else {
+         return "";
+     }
+ }
+
+ private static String getParametersString(org.eclipse.uml2.uml.Operation operation) {
+     StringBuilder parameters = new StringBuilder();
+
+     parameters.append("(");
+
+     for (Parameter parameter : operation.getOwnedParameters()) {
+         VisibilityKind visibility = parameter.getVisibility();
+         String visibilitySymbol = getVisibilitySymbol(visibility);
+
+         parameters.append(visibilitySymbol).append(parameter.getName()).append(":")
+                 .append(parameter.getType().getName()).append(", ");
+     }
+
+     if (parameters.length() > 1) {
+         parameters.setLength(parameters.length() - 2); // Remove trailing comma and space
+     }
+
+     parameters.append(")");
+
+     return parameters.toString();
+ }
+
+ private static String getVisibilitySymbol(VisibilityKind visibility) {
+     if (visibility == VisibilityKind.PUBLIC_LITERAL) {
+         return "+";
+     } else if (visibility == VisibilityKind.PRIVATE_LITERAL) {
+         return "-";
+     } else if (visibility == VisibilityKind.PROTECTED_LITERAL) {
+         return "#";
+     } else {
+         return "";
+     }
+ }
+
+ private static String getReturnType(org.eclipse.uml2.uml.Operation operation) {
+     if (operation.getType() != null) {
+         return operation.getType().getName();
+     } else {
+         return "";
+     }
+ }
+
+ private static void pumlToUml(String puml, Resource resource) {
+     // TODO: Implement the conversion logic from PlantUML to UML
+ }
 }
