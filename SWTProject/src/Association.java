@@ -43,9 +43,9 @@ public class Association {
         } else if (isAggregation(sourceEnd, targetEnd)) {
         	if (sourceEnd.isNavigable()) {
         		return "o-->";
-        	} else {
-        		return "o--";
-        	}
+        	} else if (targetEnd.isNavigable()){
+        		return "<--o";
+        	} else return "o--";
         } else if (isExtension(targetEnd, sourceEnd)) {
             return "--|>";
         } else if (isComposition(targetEnd, sourceEnd)) {
@@ -53,12 +53,6 @@ public class Association {
         		return "<--*";
         	} else {
         		return "--*";
-        	}
-        } else if (isAggregation(targetEnd, sourceEnd)) {
-        	if (targetEnd.isNavigable()) {
-        		return "<--o";
-        	} else {
-        		return "--o";
         	}
         } else {
         	if (sourceEnd.isNavigable()) {
