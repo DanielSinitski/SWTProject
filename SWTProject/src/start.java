@@ -24,8 +24,9 @@ public class start {
 	 	resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
 
 	 	//URI uri = URI.createURI("file:/C:\\Users\\\\d_sin\\eclipse-workspace\\Block4a\\\\model\\Block4.uml");
-	 	URI uri = URI.createURI("file:/C:\\Users\\d_sin\\git\\SWTProject\\SWTProject\\model\\Test_papyrus.uml");
+	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\git\\SWTProject\\SWTProject\\model\\Test_papyrus.uml");
 	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\test2\\test2.uml");
+	 	URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\final_test\\final_test.uml");
 	 	
 	 	Resource resource = resourceSet.getResource(uri, true);
    	    EcoreUtil.resolveAll(resourceSet);

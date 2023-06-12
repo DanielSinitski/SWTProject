@@ -1,5 +1,4 @@
 import org.eclipse.uml2.uml.Parameter;
-import org.eclipse.uml2.uml.VisibilityKind;
 
 public class Methode {
 	 public static String umlMethodeToPumlMethode(org.eclipse.uml2.uml.Operation operation) {
