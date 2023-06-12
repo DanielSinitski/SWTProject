@@ -5,8 +5,8 @@ import org.eclipse.uml2.uml.VisibilityKind;
 
 public class Interface {
 	public static String uml_interface_to_puml_interface(org.eclipse.uml2.uml.Interface inter) {
-		  StringBuilder ret = new StringBuilder();
-
+		StringBuilder ret = new StringBuilder();
+		ret.append("\n");
 	   // Add class stereotype if present
 	   Stereotype stereotype = inter.getAppliedStereotype("<<stereotypeName>>");
 	   if (stereotype != null) {

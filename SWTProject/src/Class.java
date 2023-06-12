@@ -6,7 +6,7 @@ import org.eclipse.uml2.uml.VisibilityKind;
 public class Class {
 	public static String umlClassToPumlClass(org.eclipse.uml2.uml.Class clazz) {
 	     StringBuilder ret = new StringBuilder();
-
+	     ret.append("\n");
 	     // Add class stereotype if present
 	     Stereotype stereotype = clazz.getAppliedStereotype("<<stereotypeName>>");
 	     if (stereotype != null) {

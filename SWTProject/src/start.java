@@ -49,16 +49,9 @@ public class start {
      for (PackageableElement packageableElement : model.getPackagedElements()) {
          if (packageableElement instanceof org.eclipse.uml2.uml.Class ) {
              org.eclipse.uml2.uml.Class clazz = (org.eclipse.uml2.uml.Class) packageableElement;
-             System.out.println(Association.uml_association_to_puml_association(clazz));
-            
-             for (Element element : clazz.getOwnedElements()) {
-                 if (element instanceof org.eclipse.uml2.uml.Property) {
-                     org.eclipse.uml2.uml.Property property = (org.eclipse.uml2.uml.Property) element;
-                 }
-             }
-
-             
              System.out.println(Class.umlClassToPumlClass(clazz));
+
+           
 
              // Add class notes if present
              for (org.eclipse.uml2.uml.Comment comment : clazz.getOwnedComments()) {
@@ -66,34 +59,32 @@ public class start {
              }
              
          }   else if(packageableElement instanceof org.eclipse.uml2.uml.Interface) {
-             org.eclipse.uml2.uml.Interface inter = (org.eclipse.uml2.uml.Interface) packageableElement;
-           System.out.print(Interface.uml_interface_to_puml_interface(inter));
-           boolean hasAssociations = false;
+             	org.eclipse.uml2.uml.Interface inter = (org.eclipse.uml2.uml.Interface) packageableElement;
+             	System.out.print(Interface.uml_interface_to_puml_interface(inter));
            
-           for (Element element : inter.getOwnedElements()) {
-               if (element instanceof org.eclipse.uml2.uml.Property) {
-                   org.eclipse.uml2.uml.Property property = (org.eclipse.uml2.uml.Property) element;
-                   if (property.getAssociation() != null) {
-                       hasAssociations = true;
-                       break;
-                   }
-               }
-           }
 
-           if (hasAssociations) {
-               System.out.println(Interface.uml_interface_to_puml_interface(inter));
-
-               // Add class notes if present
-               for (org.eclipse.uml2.uml.Comment comment : inter.getOwnedComments()) {
-                   System.out.println("note \"" + comment.getBody() + "\" as " + inter.getName());
-               }
-           }
-         }     else if(packageableElement instanceof org.eclipse.uml2.uml.Enumeration) {
-             org.eclipse.uml2.uml.Enumeration enum1 = (org.eclipse.uml2.uml.Enumeration) packageableElement;
+             	// Add class notes if present
+             	for (org.eclipse.uml2.uml.Comment comment : inter.getOwnedComments()) {
+             		System.out.println("note \"" + comment.getBody() + "\" as " + inter.getName());
+             	}
+           } else if(packageableElement instanceof org.eclipse.uml2.uml.Enumeration) {
+        	   org.eclipse.uml2.uml.Enumeration enum1 = (org.eclipse.uml2.uml.Enumeration) packageableElement;
           
-             System.out.print(Enum.uml_enum_to_puml_enum(enum1));
+        	   System.out.print(Enum.uml_enum_to_puml_enum(enum1));
          	
-         }
+           } else if(packageableElement instanceof org.eclipse.uml2.uml.Realization) {
+        	   org.eclipse.uml2.uml.Realization real = (org.eclipse.uml2.uml.Realization) packageableElement;
+               
+        	   System.out.print(Realization.uml_realization_to_puml_realization(real));
+           } else if(packageableElement instanceof org.eclipse.uml2.uml.Dependency) {
+        	   org.eclipse.uml2.uml.Dependency dep = (org.eclipse.uml2.uml.Dependency) packageableElement;
+               
+        	   System.out.print(Dependency.uml_dependency_to_puml_dependency(dep));
+           }
+           else if(packageableElement instanceof org.eclipse.uml2.uml.Association) {
+        	   org.eclipse.uml2.uml.Association association = (org.eclipse.uml2.uml.Association) packageableElement;
+        	   System.out.println(Association.uml_association_to_puml_association(association));
+           }
      }
 
      System.out.println("@enduml");
