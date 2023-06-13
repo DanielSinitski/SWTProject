@@ -1,4 +1,4 @@
-import org.eclipse.uml2.uml.NamedElement;
+
 
 public class Realization {
 	public static String uml_realization_to_puml_realization(org.eclipse.uml2.uml.Realization realization) {

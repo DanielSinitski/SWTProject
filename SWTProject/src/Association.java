@@ -32,21 +32,21 @@ public class Association {
 	}
 	
 	public static String getRelationTypeString(Property sourceEnd, Property targetEnd) {
-		if (isComposition(sourceEnd, targetEnd)) {
+		if (isComposition(targetEnd)) {
         	if (targetEnd.isNavigable()) {
         		return "*-->";
         	} else {
         		return "*--";
         	}
         } else if (isAggregation(sourceEnd)) {
-        	if (targetEnd.isNavigable()) {
-        		return "o-->";
-        	} else return "o--";
-        } else if (isAggregation(targetEnd)) {
-        	if (sourceEnd.isNavigable()){
+        	if (sourceEnd.isNavigable()) {
         		return "<--o";
         	} else return "--o";
-        } else if (isComposition(targetEnd, sourceEnd)) {
+        } else if (isAggregation(targetEnd)) {
+        	if (targetEnd.isNavigable()){
+        		return "o-->";
+        	} else return "o--";
+        } else if (isComposition(sourceEnd)) {
         	if (sourceEnd.isNavigable()) {
         		return "<--*";
         	} else {
@@ -73,12 +73,12 @@ public class Association {
 	}
 	
 
-    public static boolean isComposition(Property targetEnd, Property sourceEnd) {
-        return sourceEnd.getAggregation().getValue() == AggregationKind.COMPOSITE && targetEnd.getAggregation().getValue() == AggregationKind.NONE;
+    public static boolean isComposition(Property memberEnd) {
+        return memberEnd.getAggregation().getValue() == AggregationKind.COMPOSITE;
     }
 
-    public static boolean isAggregation(Property sourceEnd) {
-        return sourceEnd.getAggregation().getValue() == AggregationKind.SHARED;
+    public static boolean isAggregation(Property memberEnd) {
+        return memberEnd.getAggregation().getValue() == AggregationKind.SHARED;
     }
     
     public static String getMultiplicityWithLabel(String mult, String label) {
