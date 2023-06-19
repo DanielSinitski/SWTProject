@@ -49,6 +49,7 @@ public class start {
      System.out.println("\n@startuml");
 
      for (PackageableElement packageableElement : model.getPackagedElements()) {
+    	 
          if (packageableElement instanceof org.eclipse.uml2.uml.Class ) {
              org.eclipse.uml2.uml.Class clazz = (org.eclipse.uml2.uml.Class) packageableElement;
              System.out.println(Class.umlClassToPumlClass(clazz));
@@ -86,6 +87,8 @@ public class start {
            else if(packageableElement instanceof org.eclipse.uml2.uml.Association) {
         	   org.eclipse.uml2.uml.Association association = (org.eclipse.uml2.uml.Association) packageableElement;
         	   System.out.println(Association.uml_association_to_puml_association(association));
+           } else {
+        	   System.err.println("Element " + packageableElement + "konnte nicht übersetzt werden!!!");
            }
      }
 
