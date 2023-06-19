@@ -55,8 +55,14 @@ public class Class {
 	             ret.append("  ").append(Methode.umlMethodeToPumlMethode(operation)).append("\n");
 	         }
 	     }
+	     
+	     
 
 	     ret.append("}\n");
+	     
+	     if (!clazz.getGeneralizations().isEmpty()) {
+	    	 ret.append(clazz.getGeneralizations().get(0).getGeneral().getName() + " <|-- " + clazz.getName());
+	     }
 	     
 	     return ret.toString();
 	 }
