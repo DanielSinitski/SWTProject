@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="stwp/src"/>
+	<classpathentry kind="src" path="swtp/src"/>
+	<classpathentry kind="src" path="SWTProject/src"/>
+	<classpathentry kind="src" path="testgit/src"/>
+	<classpathentry kind="output" path="SWTProject/bin"/>
+</classpath>

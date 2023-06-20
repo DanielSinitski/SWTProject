@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_aRWEcAj9Ee6284iu2nwHKw" name="final_test">
+  <ownedComment xmi:type="uml:Comment" xmi:id="_tOKMYAkAEe6284iu2nwHKw" annotatedElement="_fhY6YAkAEe6284iu2nwHKw">
+    <body>Das Monster schreit</body>
+  </ownedComment>
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_aRpmcAj9Ee6284iu2nwHKw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_cKvPAAj9Ee6284iu2nwHKw" name="Tier" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_pFcx8Aj9Ee6284iu2nwHKw" name="AnzahlBeine" aggregation="shared">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ylGjQAj9Ee6284iu2nwHKw" name="Name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_5l00AAj9Ee6284iu2nwHKw" name="rennen" visibility="private" isAbstract="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_EtoO4Aj-Ee6284iu2nwHKw" name="wohin">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_OCvkIAj-Ee6284iu2nwHKw" name="wegbeschreibung" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_PyUrYAj-Ee6284iu2nwHKw" name="woher">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_eSwEYAj9Ee6284iu2nwHKw" name="Hund">
+    <generalization xmi:type="uml:Generalization" xmi:id="_lqLvgAj-Ee6284iu2nwHKw" general="_cKvPAAj9Ee6284iu2nwHKw"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_p5BugAj-Ee6284iu2nwHKw" name="cat" type="_frG-cAj9Ee6284iu2nwHKw" association="_p439gAj-Ee6284iu2nwHKw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_p5BugQj-Ee6284iu2nwHKw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_p5CVkAj-Ee6284iu2nwHKw" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_UOkNMAj-Ee6284iu2nwHKw" name="bellen"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_WOXhwAj-Ee6284iu2nwHKw" name="bellen" concurrency="concurrent">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bAjeYAj-Ee6284iu2nwHKw" name="anzahl">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_frG-cAj9Ee6284iu2nwHKw" name="Katze">
+    <generalization xmi:type="uml:Generalization" xmi:id="_k40kAAj-Ee6284iu2nwHKw" general="_cKvPAAj9Ee6284iu2nwHKw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_p439gAj-Ee6284iu2nwHKw" name="spielt_mit" visibility="public" memberEnd="_p5BugAj-Ee6284iu2nwHKw _p5CVkQj-Ee6284iu2nwHKw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_p5AgYAj-Ee6284iu2nwHKw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_p5AgYQj-Ee6284iu2nwHKw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_p5CVkQj-Ee6284iu2nwHKw" name="hund" type="_eSwEYAj9Ee6284iu2nwHKw" association="_p439gAj-Ee6284iu2nwHKw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4rxKEAj-Ee6284iu2nwHKw" name="Mensch">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ZUpEQAkAEe6284iu2nwHKw" name="hund" type="_eSwEYAj9Ee6284iu2nwHKw" aggregation="shared" association="_ZUodMAkAEe6284iu2nwHKw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ZUpEQQkAEe6284iu2nwHKw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ZUpEQgkAEe6284iu2nwHKw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_iWBlMwkAEe6284iu2nwHKw" name="monster" type="_fhY6YAkAEe6284iu2nwHKw" aggregation="composite" association="_iWBlMAkAEe6284iu2nwHKw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_iWCMQAkAEe6284iu2nwHKw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_iWCMQQkAEe6284iu2nwHKw" value="1"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Qq9uIAj_Ee6284iu2nwHKw" name="laufen">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_VZVhwAj_Ee6284iu2nwHKw" name="kann_laufen" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7SJ9gAj-Ee6284iu2nwHKw" name="gehört_zu" visibility="public" memberEnd="_7SJ9gwj-Ee6284iu2nwHKw _7SNn4Aj-Ee6284iu2nwHKw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_7SJ9gQj-Ee6284iu2nwHKw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_7SJ9ggj-Ee6284iu2nwHKw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7SNn4Aj-Ee6284iu2nwHKw" name="mensch" type="_4rxKEAj-Ee6284iu2nwHKw" association="_7SJ9gAj-Ee6284iu2nwHKw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GyZtkAj_Ee6284iu2nwHKw"/>
+      <upperValue xmi:type="uml:LiteralString" xmi:id="_IQVEIAj_Ee6284iu2nwHKw" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7SJ9gwj-Ee6284iu2nwHKw" name="kitty" type="_frG-cAj9Ee6284iu2nwHKw" association="_7SJ9gAj-Ee6284iu2nwHKw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7SLysAj-Ee6284iu2nwHKw"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7SMZwAj-Ee6284iu2nwHKw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_ZRgGIAj_Ee6284iu2nwHKw" name="Tierarten">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_eNSDoAj_Ee6284iu2nwHKw" name="Säugetier"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_g3XEQAj_Ee6284iu2nwHKw" name="Fisch"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_krMiQAj_Ee6284iu2nwHKw" name="Fuß"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_phh_EAj_Ee6284iu2nwHKw" name="Geschlecht" visibility="public">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_yPZHEAj_Ee6284iu2nwHKw" name="Anzahl_Arme">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_9j120Aj_Ee6284iu2nwHKw" name="benutzt" visibility="private" client="_4rxKEAj-Ee6284iu2nwHKw" supplier="_phh_EAj_Ee6284iu2nwHKw"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ZUodMAkAEe6284iu2nwHKw" memberEnd="_ZUpEQAkAEe6284iu2nwHKw _ZUpEQwkAEe6284iu2nwHKw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ZUodMQkAEe6284iu2nwHKw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZUodMgkAEe6284iu2nwHKw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ZUpEQwkAEe6284iu2nwHKw" name="mensch" type="_4rxKEAj-Ee6284iu2nwHKw" association="_ZUodMAkAEe6284iu2nwHKw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_fhY6YAkAEe6284iu2nwHKw" name="Monster">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_mHcBUAkAEe6284iu2nwHKw" name="Größe">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_iWBlMAkAEe6284iu2nwHKw" memberEnd="_iWBlMwkAEe6284iu2nwHKw _iWCMQgkAEe6284iu2nwHKw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_iWBlMQkAEe6284iu2nwHKw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_iWBlMgkAEe6284iu2nwHKw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_iWCMQgkAEe6284iu2nwHKw" name="mensch" type="_4rxKEAj-Ee6284iu2nwHKw" association="_iWBlMAkAEe6284iu2nwHKw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_-3dlYAkAEe6284iu2nwHKw" client="_4rxKEAj-Ee6284iu2nwHKw" supplier="_phh_EAj_Ee6284iu2nwHKw"/>
+</uml:Model>
