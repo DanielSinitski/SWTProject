@@ -32,7 +32,7 @@ public class start {
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
 
-<<<<<<< HEAD
+
         // Define the URI of the UML model file
         URI uri = URI.createURI("model\\final_test.uml");
 
@@ -96,77 +96,3 @@ public class start {
         System.out.println("@enduml");
     }
 }
-=======
-	 	//URI uri = URI.createURI("file:/C:\\Users\\\\d_sin\\eclipse-workspace\\Block4a\\\\model\\Block4.uml");
-	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\git\\SWTProject\\SWTProject\\model\\Test_papyrus.uml");
-	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\test2\\test2.uml");
-	 	//URI uri = URI.createURI("file:/C:\\Users\\d_sin\\eclipse-workspace\\final_test\\final_test.uml");
-	 	//URL for mac (mete)
-	 	URI uri = URI.createURI("file:/Users/turan/eclipse-workspace/SWTProject/SWTProject/model/final_test.uml");
-	 	
-	 	Resource resource = resourceSet.getResource(uri, true);
-   	    EcoreUtil.resolveAll(resourceSet);
-   	 
-   	 Model umlModel = (Model) resource.getContents().get(0);
-
-     for (Element element : umlModel.getOwnedElements()) {
-         System.out.println(element);
-     }
-
-     umlToPuml(umlModel);
- }
-
- private static void umlToPuml(org.eclipse.uml2.uml.Model model) {
-     System.out.println("\nAnalyze Model:");
-     System.out.println(model.getName());
-
-     System.out.println("\n@startuml");
-
-     for (PackageableElement packageableElement : model.getPackagedElements()) {
-    	 
-         if (packageableElement instanceof org.eclipse.uml2.uml.Class ) {
-             org.eclipse.uml2.uml.Class clazz = (org.eclipse.uml2.uml.Class) packageableElement;
-             System.out.println(Class.umlClassToPumlClass(clazz));
-
-           
-
-             // Add class notes if present
-             for (org.eclipse.uml2.uml.Comment comment : clazz.getOwnedComments()) {
-                 System.out.println("note \"" + comment.getBody() + "\" as " + clazz.getName());
-             }
-             
-         }   else if(packageableElement instanceof org.eclipse.uml2.uml.Interface) {
-             	org.eclipse.uml2.uml.Interface inter = (org.eclipse.uml2.uml.Interface) packageableElement;
-             	System.out.print(Interface.uml_interface_to_puml_interface(inter));
-           
-
-             	// Add class notes if present
-             	for (org.eclipse.uml2.uml.Comment comment : inter.getOwnedComments()) {
-             		System.out.println("note \"" + comment.getBody() + "\" as " + inter.getName());
-             	}
-           } else if(packageableElement instanceof org.eclipse.uml2.uml.Enumeration) {
-        	   org.eclipse.uml2.uml.Enumeration enum1 = (org.eclipse.uml2.uml.Enumeration) packageableElement;
-          
-        	   System.out.print(Enum.uml_enum_to_puml_enum(enum1));
-         	
-           } else if(packageableElement instanceof org.eclipse.uml2.uml.Realization) {
-        	   org.eclipse.uml2.uml.Realization real = (org.eclipse.uml2.uml.Realization) packageableElement;
-               
-        	   System.out.print(Realization.uml_realization_to_puml_realization(real));
-           } else if(packageableElement instanceof org.eclipse.uml2.uml.Dependency) {
-        	   org.eclipse.uml2.uml.Dependency dep = (org.eclipse.uml2.uml.Dependency) packageableElement;
-               
-        	   System.out.print(Dependency.uml_dependency_to_puml_dependency(dep));
-           }
-           else if(packageableElement instanceof org.eclipse.uml2.uml.Association) {
-        	   org.eclipse.uml2.uml.Association association = (org.eclipse.uml2.uml.Association) packageableElement;
-        	   System.out.println(Association.uml_association_to_puml_association(association));
-           } else {
-        	   System.err.println("Element " + packageableElement + "konnte nicht übersetzt werden!!!");
-           }
-     }
-
-     System.out.println("@enduml");
- }
-}
->>>>>>> 94fb83d238e2dcb3e83055cf17b2733eb57129dc
