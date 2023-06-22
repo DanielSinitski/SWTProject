@@ -22,7 +22,20 @@ public class start {
 	 * The main method of the program.
 	 * @param args Command-line arguments.
 	 */
+	
+	
     public static void main(String[] args) {
+    	
+    	String path = "";
+    	
+    	if (args.length != 1) {
+    		System.err.println("Error: Bitte Dateipfad angeben oder -h für Hilfe");
+    	} else if (args[0].equals("-h")) {
+    		System.out.println("Bei Prgrammaufruf bitte eine .uml Datei angeben\nBsp.: java -jar umlConverter.jar <path>");
+    		System.exit(0);
+    	} else {
+    		path = args[0];
+    	}
         // Create a resource set
         ResourceSet resourceSet = new ResourceSetImpl();
         resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
@@ -33,16 +46,19 @@ public class start {
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("uml", new UMLResourceFactoryImpl());
 
 
-        // Define the URI of the UML model file
-        URI uri = URI.createURI("model\\final_test.uml");
+        try {
+	        URI uri = URI.createURI(path);
+	        Resource resource = resourceSet.getResource(uri, true);
+	        EcoreUtil.resolveAll(resourceSet);
+	        Model umlModel = (Model) resource.getContents().get(0);
 
-        // Load the UML model from the resource set
-        Resource resource = resourceSet.getResource(uri, true);
-        EcoreUtil.resolveAll(resourceSet);
-        Model umlModel = (Model) resource.getContents().get(0);
+	        // Analyze and convert the UML model to PlantUML
+	        umlToPuml(umlModel);
+        } catch (Exception e) {
+        	System.err.print("Error: Date nicht gefuden an Stelle: " + path);
+        	System.exit(2);
+        }
 
-        // Analyze and convert the UML model to PlantUML
-        umlToPuml(umlModel);
     }
 
 
@@ -90,6 +106,7 @@ public class start {
                 System.out.println(Association.uml_association_to_puml_association(association));
             } else {
                 System.err.println("Element " + packageableElement + " konnte nicht übersetzt werden!!!");
+                System.exit(1);
             }
         }
 
