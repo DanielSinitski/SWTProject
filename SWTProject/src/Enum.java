@@ -13,7 +13,7 @@ public class Enum {
 	 * @param penum The UML enumeration object to be converted.
 	 * @return The converted PlantUML enumeration object as a string in puml format.
 	 */
-    public static String uml_enum_to_puml_enum(org.eclipse.uml2.uml.Enumeration penum) {
+    public static String umlEnumToPumlEnum(org.eclipse.uml2.uml.Enumeration penum) {
         String ret = "";
 
         ret += "\nenum " + penum.getName() + "{\n";

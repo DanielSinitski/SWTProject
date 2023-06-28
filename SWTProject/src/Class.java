@@ -63,7 +63,7 @@ public class Class {
 	     for (Element element : clazz.getOwnedElements()) {
 	         if (element instanceof org.eclipse.uml2.uml.Operation) {
 	             org.eclipse.uml2.uml.Operation operation = (org.eclipse.uml2.uml.Operation) element;
-	             ret.append("  ").append(Methode.umlMethodeToPumlMethode(operation)).append("\n");
+	             ret.append("  ").append(Operation.umlOperationToPumlOperation(operation)).append("\n");
 	         }
 	     }
 	     

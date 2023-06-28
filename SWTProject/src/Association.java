@@ -17,7 +17,7 @@ public class Association {
 	 */
 	
 	
-	public static String uml_association_to_puml_association(org.eclipse.uml2.uml.Association association) {
+	public static String umlAssociationToPumlAssociation(org.eclipse.uml2.uml.Association association) {
 		String ret = "";
 		Property sourceEnd = association.getMemberEnds().get(0);
 		Property targetEnd = association.getMemberEnds().get(1);

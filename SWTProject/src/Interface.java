@@ -16,7 +16,7 @@ public class Interface {
 	 * @param inter The UML interface object to be converted.
 	 * @return The converted PlantUML interface object as a string in puml format.
 	 */
-    public static String uml_interface_to_puml_interface(org.eclipse.uml2.uml.Interface inter) {
+    public static String umlInterfaceToPumlInterface(org.eclipse.uml2.uml.Interface inter) {
         StringBuilder ret = new StringBuilder();
         ret.append("\n");
 
@@ -60,7 +60,7 @@ public class Interface {
         for (Element element : inter.getOwnedElements()) {
             if (element instanceof org.eclipse.uml2.uml.Operation) {
                 org.eclipse.uml2.uml.Operation operation = (org.eclipse.uml2.uml.Operation) element;
-                ret.append("  ").append(Methode.umlMethodeToPumlMethode(operation)).append("\n");
+                ret.append("  ").append(Operation.umlOperationToPumlOperation(operation)).append("\n");
             }
         }
 

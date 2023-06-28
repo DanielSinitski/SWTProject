@@ -3,7 +3,7 @@ import org.eclipse.uml2.uml.Parameter;
 /*
  *  The 'Methode' class contains static methods to convert UML operation objects into PlantUML method objects.
  */
-public class Methode {
+public class Operation {
 
 	/*
 	 * Converts a UML operation object into a PlantUML method object in puml format.
@@ -11,7 +11,7 @@ public class Methode {
 	 *@param operation The UML operation object to be converted. 
 	 *@return The converted PlantUML method object as a string in puml format.
 	 */
-    public static String umlMethodeToPumlMethode(org.eclipse.uml2.uml.Operation operation) {
+    public static String umlOperationToPumlOperation(org.eclipse.uml2.uml.Operation operation) {
         StringBuilder ret = new StringBuilder();
 
         if (operation.isStatic()) {

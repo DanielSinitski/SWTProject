@@ -85,7 +85,7 @@ public class start {
 
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Interface) {
                 org.eclipse.uml2.uml.Interface inter = (org.eclipse.uml2.uml.Interface) packageableElement;
-                System.out.print(Interface.uml_interface_to_puml_interface(inter));
+                System.out.print(Interface.umlInterfaceToPumlInterface(inter));
 
                 // Add class notes if present
                 for (org.eclipse.uml2.uml.Comment comment : inter.getOwnedComments()) {
@@ -93,17 +93,17 @@ public class start {
                 }
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Enumeration) {
                 org.eclipse.uml2.uml.Enumeration enum1 = (org.eclipse.uml2.uml.Enumeration) packageableElement;
-                System.out.print(Enum.uml_enum_to_puml_enum(enum1));
+                System.out.print(Enum.umlEnumToPumlEnum(enum1));
 
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Realization) {
                 org.eclipse.uml2.uml.Realization real = (org.eclipse.uml2.uml.Realization) packageableElement;
-                System.out.print(Realization.uml_realization_to_puml_realization(real));
+                System.out.print(Realization.umlRealizationToPumlRealization(real));
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Dependency) {
                 org.eclipse.uml2.uml.Dependency dep = (org.eclipse.uml2.uml.Dependency) packageableElement;
-                System.out.print(Dependency.uml_dependency_to_puml_dependency(dep));
+                System.out.print(Dependency.umlDependencyToPumlDependency(dep));
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Association) {
                 org.eclipse.uml2.uml.Association association = (org.eclipse.uml2.uml.Association) packageableElement;
-                System.out.println(Association.uml_association_to_puml_association(association));
+                System.out.println(Association.umlAssociationToPumlAssociation(association));
             } else {
                 System.err.println("Element " + packageableElement + " konnte nicht übersetzt werden!!!");
                 System.exit(1);
