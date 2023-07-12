@@ -31,7 +31,7 @@ public class start {
     	if (args.length != 1) {
     		System.err.println("Error: Bitte Dateipfad angeben oder -h für Hilfe");
     	} else if (args[0].equals("-h")) {
-    		System.out.println("Bei Prgrammaufruf bitte eine .uml Datei angeben\nBsp.: java -jar umlConverter.jar <path>");
+    		System.out.println("Bei Programmaufruf bitte eine .uml Datei angeben\nBsp.: java -jar umlConverter.jar <path>");
     		System.exit(0);
     	} else {
     		path = args[0];
@@ -55,7 +55,7 @@ public class start {
 	        // Analyze and convert the UML model to PlantUML
 	        umlToPuml(umlModel);
         } catch (Exception e) {
-        	System.err.print("Error: Date nicht gefuden an Stelle: " + path);
+        	System.err.print("Error: Datei nicht gefunden an Stelle: " + path);
         	System.exit(2);
         }
 
@@ -78,32 +78,26 @@ public class start {
                 org.eclipse.uml2.uml.Class clazz = (org.eclipse.uml2.uml.Class) packageableElement;
                 System.out.println(Class.umlClassToPumlClass(clazz));
 
-                // Add class notes if present
-                for (org.eclipse.uml2.uml.Comment comment : clazz.getOwnedComments()) {
-                    System.out.println("note \"" + comment.getBody() + "\" as " + clazz.getName());
-                }
-
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Interface) {
                 org.eclipse.uml2.uml.Interface inter = (org.eclipse.uml2.uml.Interface) packageableElement;
                 System.out.print(Interface.umlInterfaceToPumlInterface(inter));
-
-                // Add class notes if present
-                for (org.eclipse.uml2.uml.Comment comment : inter.getOwnedComments()) {
-                    System.out.println("note \"" + comment.getBody() + "\" as " + inter.getName());
-                }
+                
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Enumeration) {
                 org.eclipse.uml2.uml.Enumeration enum1 = (org.eclipse.uml2.uml.Enumeration) packageableElement;
                 System.out.print(Enum.umlEnumToPumlEnum(enum1));
-
+                
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Realization) {
                 org.eclipse.uml2.uml.Realization real = (org.eclipse.uml2.uml.Realization) packageableElement;
                 System.out.print(Realization.umlRealizationToPumlRealization(real));
+                
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Dependency) {
                 org.eclipse.uml2.uml.Dependency dep = (org.eclipse.uml2.uml.Dependency) packageableElement;
                 System.out.print(Dependency.umlDependencyToPumlDependency(dep));
+                
             } else if (packageableElement instanceof org.eclipse.uml2.uml.Association) {
                 org.eclipse.uml2.uml.Association association = (org.eclipse.uml2.uml.Association) packageableElement;
                 System.out.println(Association.umlAssociationToPumlAssociation(association));
+                
             } else {
                 System.err.println("Element " + packageableElement + " konnte nicht übersetzt werden!!!");
                 System.exit(1);

@@ -29,7 +29,8 @@ public class Association {
 		String targetEndLabelName = (targetEnd.getName()!=null)? "    " +  targetEnd.getName() : "";
 		String sourcemultiplicityWithLabel = getMultiplicityWithLabel(sourceEndMultiplicityString, sourceEndLabelName);
 		String targetmultiplicityWithLabel = getMultiplicityWithLabel(targetEndMultiplicityString, targetEndLabelName);
-		ret = ret + "\n" + sourceEnd.getType().getName() + sourcemultiplicityWithLabel + relationType + targetmultiplicityWithLabel + targetEnd.getType().getName() + associationLabel + "\n";
+		ret = ret + "\n" + sourceEnd.getType().getName() + sourcemultiplicityWithLabel + relationType 
+				+ targetmultiplicityWithLabel + targetEnd.getType().getName() + associationLabel + "\n";
 		return ret;
 	}
 	   /*
@@ -95,6 +96,12 @@ public class Association {
 	}
 	
 
+	/*
+     * Checks if the member end represents a composition association.
+     * 
+     * @param memberEnd The member end of the association.
+     * @return true if the member end represents an aggregation association, false otherwise.
+     */
     public static boolean isComposition(Property memberEnd) {
         return memberEnd.getAggregation().getValue() == AggregationKind.COMPOSITE;
     }
