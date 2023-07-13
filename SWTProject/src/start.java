@@ -9,6 +9,8 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.resource.UMLResource;
+import java.util.ArrayList;
+import java.util.List;
  /*
   * The 'start' class is the entry point of the program for analyzing a UML model and converting it to PlantUML syntax.
 
@@ -56,7 +58,7 @@ public class start {
 	        umlToPuml(umlModel);
         } catch (Exception e) {
         	System.err.print("Error: Datei nicht gefunden an Stelle: " + path);
-        	System.exit(2);
+        	System.exit(1);
         }
 
     }
@@ -73,6 +75,8 @@ public class start {
 
         System.out.println("\n@startuml");
 
+        List<String> error_messages = new ArrayList<String>();
+        
         for (PackageableElement packageableElement : model.getPackagedElements()) {
             if (packageableElement instanceof org.eclipse.uml2.uml.Class) {
                 org.eclipse.uml2.uml.Class clazz = (org.eclipse.uml2.uml.Class) packageableElement;
@@ -99,11 +103,16 @@ public class start {
                 System.out.println(Association.umlAssociationToPumlAssociation(association));
                 
             } else {
-                System.err.println("Element " + packageableElement + " konnte nicht übersetzt werden!!!");
-                System.exit(1);
+                error_messages.add("Element " + packageableElement + " konnte nicht übersetzt werden!!!");
             }
         }
 
         System.out.println("@enduml");
+        
+        System.out.println("\n");
+        System.out.println("\n");
+    	for (String error_message : error_messages){
+    		System.out.println(error_message);
+    	}
     }
 }

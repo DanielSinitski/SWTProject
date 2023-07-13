@@ -33,6 +33,7 @@ public class Association {
 				+ targetmultiplicityWithLabel + targetEnd.getType().getName() + associationLabel + "\n";
 		return ret;
 	}
+	
 	   /*
      * Returns the label of the association.
      * 
@@ -46,6 +47,7 @@ public class Association {
             return "";
         }
 	}
+	
 	 /*
      * Determines the relation type between the source and target ends of the association.
      * 
@@ -53,7 +55,6 @@ public class Association {
      * @param targetEnd The target end of the association.
      * @return The relation type as a string.
      */
-	
 	public static String getRelationTypeString(Property sourceEnd, Property targetEnd) {
 		if (isComposition(targetEnd)) {
         	if (targetEnd.isNavigable()) {
@@ -84,6 +85,12 @@ public class Association {
         }
 	}
 
+	/*
+     * Determines the multiplicity of a member end of the association.
+     * 
+     * @param memberEnd A member end of the association.
+     * @return The relation type as a string.
+     */
 	public static String getMultiplicityString(Property memberEnd) {
 		MultiplicityElement multiplicityElement = (MultiplicityElement) memberEnd;
 		ValueSpecification lowerValue = multiplicityElement.getLowerValue();
@@ -105,6 +112,7 @@ public class Association {
     public static boolean isComposition(Property memberEnd) {
         return memberEnd.getAggregation().getValue() == AggregationKind.COMPOSITE;
     }
+    
     /*
      * Checks if the member end represents an aggregation association.
      * 
@@ -114,6 +122,7 @@ public class Association {
     public static boolean isAggregation(Property memberEnd) {
         return memberEnd.getAggregation().getValue() == AggregationKind.SHARED;
     }
+    
     /*
      * Returns the multiplicity with the label for the given multiplicity string and label.
      * 

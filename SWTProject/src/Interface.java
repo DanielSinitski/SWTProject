@@ -20,7 +20,7 @@ public class Interface {
         StringBuilder ret = new StringBuilder();
         ret.append("\n");
 
-        // Add class stereotype if present
+        // Add interface stereotype if present
         Stereotype stereotype = inter.getAppliedStereotype("<<stereotypeName>>");
         if (stereotype != null) {
             ret.append("  ").append("<<" + stereotype.getName() + ">>").append("\n");
@@ -38,7 +38,7 @@ public class Interface {
             visibilitySymbol = "#";
         }
 
-        // Check if class is abstract and add notation
+        // Check if interface is abstract and add notation
         if (inter.isAbstract()) {
             visibilitySymbol += "{abstract} ";
         }

@@ -1,7 +1,7 @@
 import org.eclipse.uml2.uml.Parameter;
 
 /*
- *  The 'Methode' class contains static methods to convert UML operation objects into PlantUML method objects.
+ *  The 'Operation' class contains static methods to convert UML operation objects into PlantUML method objects.
  */
 public class Operation {
 
@@ -23,7 +23,7 @@ public class Operation {
                 .append(operation.getName())
                 .append(getParametersString(operation));
 
-        ret.append(": ").append(getReturnType(operation));
+        ret.append(getReturnType(operation));
 
         return ret.toString();
     }
@@ -78,7 +78,7 @@ public class Operation {
      */
     private static String getReturnType(org.eclipse.uml2.uml.Operation operation) {
         if (operation.getType() != null) {
-            return operation.getType().getName();
+            return ": " + operation.getType().getName();
         } else {
             return "";
         }
